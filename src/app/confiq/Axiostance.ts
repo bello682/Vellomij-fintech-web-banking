@@ -3,7 +3,9 @@ import { LOGOUT_SUCCESS } from "../store/auth/actionType/logoutActionType"; // A
 import store from "../store/auth/store"; // Adjust your path
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8006/Api_Url";
+  process.env.NEXT_PUBLIC_API_BASE_URL ||
+  "https://vellomij-fintech-banking-backend-api.onrender.com/Api_Url";
+// "http://localhost:8006/Api_Url";
 let isLoggingOut = false;
 
 const Axiotance = axios.create({
