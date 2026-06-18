@@ -4,7 +4,7 @@ import store from "../store/auth/store"; // Adjust your path
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ||
-  "https://vellomij-fintech-banking-backend-api.onrender.com/Api_Url";
+  "https://vellomij-fintech-api-public.onrender.com/Api_Url";
 // "http://localhost:8006/Api_Url";
 let isLoggingOut = false;
 
