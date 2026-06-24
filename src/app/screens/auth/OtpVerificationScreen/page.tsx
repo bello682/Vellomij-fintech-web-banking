@@ -9,11 +9,17 @@ import { verifyUser } from "../../../store/auth/action/verificationAction";
 import { AppDispatch } from "../../../store/auth/store";
 import { toast } from "sonner"; // Assuming you have sonner for toasts
 import { resendOtpUser } from "@/app/store/auth/action/resendOtpAction";
+import DevOTPModal from "@/components/forTestingPurpose/DevOTPModal";
 
 export default function OTPScreen() {
   const [code, setCode] = useState("");
   const [timer, setTimer] = useState(60);
   const [canResend, setCanResend] = useState(false);
+
+  // for testing
+  const [showTestModal, setShowTestModal] = useState(false);
+  const [testOtp, setTestOtp] = useState("");
+  // for testing
 
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -58,6 +64,18 @@ export default function OTPScreen() {
     }
   };
 
+  // for testing
+  // If you pass the test OTP from the Registration page to this screen
+  // or get it from your global state:
+  useEffect(() => {
+    const devOtp = localStorage.getItem("dev_otp");
+    if (devOtp) {
+      setTestOtp(devOtp);
+      setShowTestModal(true);
+    }
+  }, []);
+  // for testing
+
   return (
     <div className="min-h-screen bg-white flex flex-col p-6 pt-10">
       <button
@@ -66,7 +84,6 @@ export default function OTPScreen() {
       >
         <ArrowLeft className="text-[#0A1629]" size={24} />
       </button>
-
       <div className="flex-1 max-w-md mx-auto w-full pt-10">
         <h1 className="text-[28px] font-extrabold text-[#0A1629] mb-3">
           Verification
@@ -145,6 +162,17 @@ export default function OTPScreen() {
           </button>
         </div>
       </div>
+      // Inside the return block, before the closing div
+      {showTestModal && (
+        <DevOTPModal
+          otp={testOtp}
+          onClose={() => setShowTestModal(false)}
+          onFill={() => {
+            setCode(testOtp);
+            setShowTestModal(false);
+          }}
+        />
+      )}
     </div>
   );
 }

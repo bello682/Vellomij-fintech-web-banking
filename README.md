@@ -37,3 +37,9 @@ app/dashboard/
 ├── settings/             # Security, Pin, Delete Account
 └── support/              # Chat & Help Center
 ```
+
+## 📂 Note: 🛠️ Development & Deployment Notes
+
+Email Services: Due to Render's free tier restrictions, automated emails may experience delays or be blocked.
+
+OTP Verification: For testing purposes, if you are not receiving the verification email, the OTP is currently being logged to the server console. In the development build, the OTP is also returned in the registration response to allow for seamless testing on mobile devices.
