@@ -26,7 +26,7 @@ export const resendOtpUser =
       }
 
       // for testing purpose
-      if (res.data.otp) {
+      if (res.data.newOtp) {
         localStorage.setItem("dev_otp", res.data.newOtp);
         console.log("OTP saved to localStorage:", res.data.newOtp);
       }
