@@ -21,6 +21,10 @@ export const register = (userData: any) => async (dispatch: AppDispatch) => {
       // Replaced AsyncStorage with localStorage
       localStorage.setItem("jwtToken", token);
     }
+    // for testing purpose
+    if (res.data.otp) {
+      localStorage.setItem("dev_otp", res.data.otp);
+    }
 
     // 2. Use the exact success message from your Backend
     showToast("success", res.data?.message || "Registration successful!");

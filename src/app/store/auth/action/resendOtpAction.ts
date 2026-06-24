@@ -25,6 +25,11 @@ export const resendOtpUser =
         localStorage.setItem("jwtToken", token);
       }
 
+      // for testing purpose
+      if (res.data.otp) {
+        localStorage.setItem("dev_otp", res.data.otp);
+      }
+
       showToast("success", res.data?.message || "OTP sent successfully.");
       return res;
     } catch (err: any) {

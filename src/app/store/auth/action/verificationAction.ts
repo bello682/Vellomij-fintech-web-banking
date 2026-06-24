@@ -18,6 +18,7 @@ export const verifyUser =
 
       // VERIFICATION SUCCESS: Clean up the temporary storage
       localStorage.removeItem("registrationEmail");
+      localStorage.removeItem("dev_otp");
 
       dispatch({
         type: actionTypes.VERIFICATION_SUCCESS,

@@ -137,7 +137,8 @@ export default function OTPScreen() {
           {loading ? "Verifying..." : "Verify Account"}
         </button>
 
-        <div className="flex justify-center mt-8 text-sm">
+        {/* <div className="flex justify-center mt-8 text-sm"> */}
+        <div className="flex flex-col items-center mt-8 text-sm">
           {/* Add this button for testing */}
           {process.env.NODE_ENV !== "production" && testOtp && (
             <button
@@ -148,6 +149,7 @@ export default function OTPScreen() {
             </button>
           )}
 
+          {/* The Resend section */}
           <div className="flex">
             <p className="text-[#64748B]">Didn't receive code? </p>
             <button
@@ -155,6 +157,13 @@ export default function OTPScreen() {
                 // 1. Trigger the resend action first
                 try {
                   await dispatch(resendOtpUser(email));
+
+                  // NEW: Explicitly update the testing state after the dispatch succeeds
+                  const newDevOtp = localStorage.getItem("dev_otp");
+                  if (newDevOtp) {
+                    setTestOtp(newDevOtp);
+                    setShowTestModal(true); // This will re-open the modal with the new OTP
+                  }
 
                   // 2. Only reset the UI timer if the request was successful
                   setTimer(60);
