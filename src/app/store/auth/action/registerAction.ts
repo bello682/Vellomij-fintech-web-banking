@@ -15,8 +15,6 @@ export const register = (userData: any) => async (dispatch: AppDispatch) => {
       payload: res.data,
     });
 
-    console.log(res.data);
-
     // 1. Prioritize saving the token if returned upon registration
     const token = res.data?.token;
     if (token) {
