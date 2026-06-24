@@ -119,6 +119,8 @@ export default function OTPScreen() {
         <input
           ref={inputRef}
           type="number"
+          inputMode="numeric"
+          pattern="\d*"
           value={code}
           onChange={(e) =>
             e.target.value.length <= CODE_LENGTH && setCode(e.target.value)
@@ -136,33 +138,46 @@ export default function OTPScreen() {
         </button>
 
         <div className="flex justify-center mt-8 text-sm">
-          <p className="text-[#64748B]">Didn't receive code? </p>
-          <button
-            onClick={async () => {
-              // 1. Trigger the resend action first
-              try {
-                await dispatch(resendOtpUser(email));
+          {/* Add this button for testing */}
+          {process.env.NODE_ENV !== "production" && testOtp && (
+            <button
+              onClick={() => setShowTestModal(true)}
+              className="text-[#6D28D9] font-semibold mb-4 underline"
+            >
+              View Testing OTP
+            </button>
+          )}
 
-                // 2. Only reset the UI timer if the request was successful
-                setTimer(60);
-                setCanResend(false);
-                setCode("");
-              } catch (err) {
-                // The action's catch block already handles the error toast
-              }
-            }}
-            disabled={!canResend || loading} // Add loading check here
-            className={`font-bold ml-1 ${canResend ? "text-[#6D28D9]" : "text-[#E2E8F0]"}`}
-          >
-            {loading
-              ? "Sending..."
-              : canResend
-                ? "Resend OTP"
-                : `Resend in ${timer}s`}
-          </button>
+          <div className="flex">
+            <p className="text-[#64748B]">Didn't receive code? </p>
+            <button
+              onClick={async () => {
+                // 1. Trigger the resend action first
+                try {
+                  await dispatch(resendOtpUser(email));
+
+                  // 2. Only reset the UI timer if the request was successful
+                  setTimer(60);
+                  setCanResend(false);
+                  setCode("");
+                } catch (err) {
+                  // The action's catch block already handles the error toast
+                }
+              }}
+              disabled={!canResend || loading} // Add loading check here
+              className={`font-bold ml-1 ${canResend ? "text-[#6D28D9]" : "text-[#E2E8F0]"}`}
+            >
+              {loading
+                ? "Sending..."
+                : canResend
+                  ? "Resend OTP"
+                  : `Resend in ${timer}s`}
+            </button>
+          </div>
         </div>
       </div>
-      // Inside the return block, before the closing div
+
+      {/* Inside the return block, before the closing div: */}
       {showTestModal && (
         <DevOTPModal
           otp={testOtp}
