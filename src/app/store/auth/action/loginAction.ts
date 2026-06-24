@@ -6,7 +6,9 @@ export const loginUser = (credentials: any) => async (dispatch: any) => {
   try {
     dispatch({ type: actionTypes.LOGIN_REQUEST });
 
-    const res = await Axiotance.post("/FintechUsers/login", credentials);
+    const res = await Axiotance.post("/FintechUsers/login", credentials, {
+      timeout: 30000,
+    });
 
     const userData = res.data;
     if (userData.token) {
