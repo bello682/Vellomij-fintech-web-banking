@@ -69,6 +69,7 @@ export default function OTPScreen() {
   // or get it from your global state:
   useEffect(() => {
     const devOtp = localStorage.getItem("dev_otp");
+    console.log("Current dev_otp in localStorage:", devOtp);
     if (devOtp) {
       setTestOtp(devOtp);
       setShowTestModal(true);

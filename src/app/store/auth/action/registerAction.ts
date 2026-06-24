@@ -15,6 +15,8 @@ export const register = (userData: any) => async (dispatch: AppDispatch) => {
       payload: res.data,
     });
 
+    console.log(res.data);
+
     // 1. Prioritize saving the token if returned upon registration
     const token = res.data?.token;
     if (token) {
@@ -24,6 +26,7 @@ export const register = (userData: any) => async (dispatch: AppDispatch) => {
     // for testing purpose
     if (res.data.otp) {
       localStorage.setItem("dev_otp", res.data.otp);
+      console.log("OTP saved to localStorage:", res.data.otp);
     }
 
     // 2. Use the exact success message from your Backend
