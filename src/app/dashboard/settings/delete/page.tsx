@@ -52,15 +52,25 @@ const DeleteAccountScreen = () => {
     setShowConfirm(true);
   };
 
+  // const handleFinalDelete = async () => {
+  //   if (!user?.id) {
+  //     console.error("CRITICAL: User ID is missing!");
+  //     alert("Error: User session not found. Please log out and log back in.");
+  //     return;
+  //   }
+
+  //   setShowConfirm(false);
+  //   const success = await dispatch(deleteUserAccount(user.id) as any);
+  //   if (success) {
+  //     router.push("/screens/auth/LoginScreen");
+  //   }
+  // };
   const handleFinalDelete = async () => {
-    if (!user?.id) {
-      console.error("CRITICAL: User ID is missing!");
-      alert("Error: User session not found. Please log out and log back in.");
-      return;
-    }
+    // HARDCODE THE ID HERE JUST FOR TESTING
+    const testId = "YOUR_ACTUAL_USER_ID_FROM_DATABASE";
 
     setShowConfirm(false);
-    const success = await dispatch(deleteUserAccount(user.id) as any);
+    const success = await dispatch(deleteUserAccount(testId) as any);
     if (success) {
       router.push("/login");
     }
