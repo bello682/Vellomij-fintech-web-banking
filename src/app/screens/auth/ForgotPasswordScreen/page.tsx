@@ -6,9 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { ArrowLeft, Key, Mail } from "lucide-react";
 import { AppDispatch } from "../../../store/auth/store"; // Adjust path as needed
 import { forgetUserPassword } from "../../../store/auth/action/forgetPasswordAction";
+import DevGetForgetResetPasswordModal from "@/components/forTestingPurpose/DevGetForgetResetPasswordModal";
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
+
+  // for testing sake
+  const [showModal, setShowModal] = useState(false);
+  const [token, setToken] = useState("");
+  // for testing sake
+
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -26,6 +33,13 @@ const ForgotPasswordScreen = () => {
       // After 3 seconds, navigate back to Login
       setTimeout(() => router.push("/screens/auth/LoginScreen"), 3000);
     }
+
+    // testing sake
+    if (success?.data?.mailData?.resetToken) {
+      setToken(success.data.mailData.resetToken);
+      setShowModal(true);
+    }
+    // testing sake
   };
 
   return (
@@ -83,6 +97,12 @@ const ForgotPasswordScreen = () => {
           </button>
         </form>
       </div>
+      {showModal && (
+        <DevGetForgetResetPasswordModal
+          token={token}
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 };
