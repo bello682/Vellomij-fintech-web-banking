@@ -25,9 +25,7 @@ export const fetchUserById = (userID: string) => async (dispatch: Dispatch) => {
     dispatch({ type: actionTypes.FETCH_USER_BY_ID_REQUEST });
 
     // Make the request to fetch user by ID
-    const res = await axios.get(
-      `${process.env.EXPO_PUBLIC_MOBILE_APP_BASE_URL}/FintechUsers/user/${userID}`,
-    );
+    const res = await axios.get(`/FintechUsers/user/${userID}`);
 
     dispatch({
       type: actionTypes.FETCH_USER_BY_ID_SUCCESS,

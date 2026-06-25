@@ -12,7 +12,7 @@ export const forgetUserPassword =
       const cleanEmail = email.toLowerCase().trim();
 
       const res = await Axiotance.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/FintechUsers/forgot-password`,
+        `/FintechUsers/forgot-password`,
         { email: cleanEmail, platform },
         { headers: { "Content-Type": "application/json" } },
       );

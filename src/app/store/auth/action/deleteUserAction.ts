@@ -11,10 +11,9 @@ export const deleteUserAccount = (userID: string) => async (dispatch: any) => {
     const jwtToken = localStorage.getItem("jwtToken");
 
     // This hits the new Soft Delete endpoint
-    const res = await Axiotance.delete(
-      `${process.env.EXPO_PUBLIC_MOBILE_APP_BASE_URL}/FintechUsers/user/${userID}`,
-      { headers: { Authorization: `Bearer ${jwtToken}` } },
-    );
+    const res = await Axiotance.delete(`/FintechUsers/user/${userID}`, {
+      headers: { Authorization: `Bearer ${jwtToken}` },
+    });
 
     // CLEAR REDUX AND STORAGE
     dispatch({ type: actionTypes.DELETE_USER_SUCCESS });
@@ -24,6 +23,8 @@ export const deleteUserAccount = (userID: string) => async (dispatch: any) => {
     localStorage.removeItem("user");
 
     showToast("success", "Account closed successfully.");
+    console.log("DEACTIVATION OF USER:", res.data);
+
     return true;
   } catch (err: any) {
     dispatch({
