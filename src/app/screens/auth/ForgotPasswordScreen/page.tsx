@@ -28,15 +28,21 @@ const ForgotPasswordScreen = () => {
     e.preventDefault();
     if (!email) return;
 
-    const success = await dispatch(forgetUserPassword(email, "web") as any);
-    if (success) {
-      // After 3 seconds, navigate back to Login
-      setTimeout(() => router.push("/screens/auth/LoginScreen"), 3000);
-    }
+    // 1. Await the action and get the full response
+    const response = await dispatch(forgetUserPassword(email, "web") as any);
+    // if (response) {
+    //   // After 3 seconds, navigate back to Login
+    //   setTimeout(() => router.push("/screens/auth/LoginScreen"), 3000);
+    // }
 
     // testing sake
-    if (success?.data?.mailData?.resetToken) {
-      setToken(success.data.mailData.resetToken);
+
+    // 2. Access the data correctly.
+    // If your action returns the full Axios response, use response.data
+    const responseData = response?.data || response;
+
+    if (responseData?.data?.mailData?.resetToken) {
+      setToken(responseData.data.mailData.resetToken);
       setShowModal(true);
     }
     // testing sake
