@@ -40,6 +40,8 @@ const ForgotPasswordScreen = () => {
     if (response?.mailData?.resetToken) {
       setToken(response.mailData.resetToken);
       setShowModal(true);
+    } else {
+      console.log("Logic failed because response or mailData is missing");
     }
   };
 
@@ -98,7 +100,7 @@ const ForgotPasswordScreen = () => {
           </button>
         </form>
       </div>
-      {process.env.NODE_ENV === "development" && showModal && (
+      {showModal && (
         <DevGetForgetResetPasswordModal
           token={token}
           onClose={() => setShowModal(false)}
