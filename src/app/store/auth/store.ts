@@ -19,6 +19,7 @@ import { resendOtpReducer } from "./reducer/resendOtpReducer";
 import { registrationReducer } from "./reducer/resgisterReducer";
 import { verificationReducer } from "./reducer/verificationReducer";
 import { resetPasswordReducer } from "./reducer/resetPasswordReducer";
+import profileReducer from "./reducer/dashboard/profileReducer";
 
 // 1. This is your standard combined reducer
 const appReducer = combineReducers({
@@ -37,6 +38,7 @@ const appReducer = combineReducers({
   supportState: supportReducer,
   billState: billReducer,
   resetPasswordState: resetPasswordReducer,
+  profileState: profileReducer,
 });
 
 // 2. This is the "Master" Reducer that clears everything on logout

@@ -4,7 +4,9 @@
 import { Sidebar } from "../../components/dashboard/Sidebar/page";
 import { Header } from "../../components/dashboard/Header/page";
 import { ProtectedRoute } from "../../components/auth/ProtectedRoute";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getFullUserProfile } from "../store/auth/action/dashboard/profileAction";
+import { useDispatch } from "react-redux";
 
 export default function DashboardLayout({
   children,
@@ -12,6 +14,12 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  // Trigger hydration here so all dashboard pages have access to the data
+  useEffect(() => {
+    dispatch(getFullUserProfile() as any);
+  }, [dispatch]);
 
   return (
     // This wrapper prevents unauthorized users from accessing any dashboard route

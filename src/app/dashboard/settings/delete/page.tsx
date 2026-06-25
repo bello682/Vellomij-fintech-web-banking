@@ -21,8 +21,10 @@ const DeleteAccountScreen = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const { user } = useAppSelector((state: any) => state.loginState);
+  // const { user } = useAppSelector((state: any) => state.loginState);
   const { loading_now } = useAppSelector((state: any) => state.deleteUserState);
+  const { user } = useAppSelector((state: any) => state.profileReducer);
+  // You can now access user.bankInfo.balance or user.transactions directly!
 
   const balance = user?.bankInfo?.balance ?? 0;
   const [hasConsented, setHasConsented] = useState(false);
