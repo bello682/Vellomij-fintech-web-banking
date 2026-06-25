@@ -49,6 +49,7 @@ const DeleteAccountScreen = () => {
   };
 
   const handleFinalDelete = async () => {
+    console.log("Attempting to delete user with ID:", user.id);
     setShowConfirm(false);
     const success = await dispatch(deleteUserAccount(user.id) as any);
     if (success) {
