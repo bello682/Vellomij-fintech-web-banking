@@ -38,25 +38,14 @@ const ForgotPasswordScreen = () => {
     if (!email) return;
 
     // 1. Await the action and get the full response
-    const response = await dispatch(forgetUserPassword(email, "web") as any);
+    // const response = await dispatch(forgetUserPassword(email, "web") as any);
     // if (response) {
     //   // After 3 seconds, navigate back to Login
     //   setTimeout(() => router.push("/screens/auth/LoginScreen"), 3000);
     // }
 
-    // testing sake
-
-    // 2. Access the data correctly.
-    // If your action returns the full Axios response, use response.data
-    const responseData = response?.data?.mailData;
-
-    if (responseData?.resetToken) {
-      setToken(responseData.resetToken);
-      setShowModal(true);
-    } else {
-      console.error("Token not found in response!");
-    }
-    // testing sake
+    // Just dispatch. Let the useEffect handle the Modal logic!
+    dispatch(forgetUserPassword(email, "web") as any);
   };
 
   return (

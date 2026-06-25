@@ -24,7 +24,7 @@ export const forgetUserPassword =
 
       showToast("success", res.data.message);
 
-      return res;
+      return res.data;
     } catch (err: any) {
       const errorMessage = err.response?.data?.message || "Network Error";
       dispatch({
