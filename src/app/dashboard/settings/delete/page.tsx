@@ -1,7 +1,7 @@
 // # DeleteAccountScreen
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import {
@@ -30,10 +30,14 @@ const DeleteAccountScreen = () => {
   // Custom Modal State
   const [showConfirm, setShowConfirm] = useState(false);
 
+  useEffect(() => {
+    console.log("CURRENT USER OBJECT FROM REDUX:", user);
+  }, [user]);
+
   const validateAndDelete = () => {
     if (balance > 0) {
       alert(
-        `Withdraw Funds First: You still have ₦${balance.toLocaleString()} in your account. Please withdraw or transfer your balance before deleting.`,
+        `Withdraw All Funds First: You still have ₦${balance.toLocaleString()} in your account. Please withdraw or transfer your balance before deleting.`,
       );
       return;
     }
@@ -49,7 +53,12 @@ const DeleteAccountScreen = () => {
   };
 
   const handleFinalDelete = async () => {
-    console.log("Attempting to delete user with ID:", user.id);
+    if (!user?.id) {
+      console.error("CRITICAL: User ID is missing!");
+      alert("Error: User session not found. Please log out and log back in.");
+      return;
+    }
+
     setShowConfirm(false);
     const success = await dispatch(deleteUserAccount(user.id) as any);
     if (success) {
