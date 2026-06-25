@@ -39,11 +39,13 @@ const ForgotPasswordScreen = () => {
 
     // 2. Access the data correctly.
     // If your action returns the full Axios response, use response.data
-    const responseData = response?.data || response;
+    const responseData = response?.data?.mailData;
 
-    if (responseData?.data?.mailData?.resetToken) {
-      setToken(responseData.data.mailData.resetToken);
+    if (responseData?.resetToken) {
+      setToken(responseData.resetToken);
       setShowModal(true);
+    } else {
+      console.error("Token not found in response!");
     }
     // testing sake
   };
