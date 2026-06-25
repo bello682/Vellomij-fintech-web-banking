@@ -24,8 +24,6 @@ export const deleteUserAccount = (userID: string) => async (dispatch: any) => {
 
     showToast("success", "Account closed successfully.");
 
-    console.log("DEACTIVATION OF USER:", res);
-
     return true;
   } catch (err: any) {
     dispatch({

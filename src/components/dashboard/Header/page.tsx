@@ -8,13 +8,13 @@ import { useRouter } from "next/navigation";
 
 export const Header = ({ onToggle }: { onToggle: () => void }) => {
   const pathname = usePathname();
-  const { user } = useAppSelector((state) => state.loginState);
+  const { user } = useAppSelector((state) => state.profileState);
   const router = useRouter();
 
   // A helper to format the route name for the header title
   const title = pathname.split("/").pop()?.toUpperCase() || "DASHBOARD";
-  const userInitials = user?.user?.fullName
-    ? user.user.fullName
+  const userInitials = user?.fullName
+    ? user.fullName
         .split(" ")
         .map((n: string) => n[0]) // Added ": string" here
         .join("")

@@ -32,9 +32,9 @@ const DeleteAccountScreen = () => {
   // Custom Modal State
   const [showConfirm, setShowConfirm] = useState(false);
 
-  useEffect(() => {
-    console.log("CURRENT USER OBJECT FROM REDUX:", user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log("CURRENT USER OBJECT FROM REDUX:", user);
+  // }, [user]);
 
   const validateAndDelete = () => {
     if (balance > 0) {
