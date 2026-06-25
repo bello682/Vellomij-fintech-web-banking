@@ -19,11 +19,12 @@ export const forgetUserPassword =
 
       dispatch({
         type: actionTypes.FORGET_PASSWORD_SUCCESS,
-        payload: res.data.message, // Fixed: use res.data.message
+        payload: res.data, // Fixed: use res.data.message
       });
 
       showToast("success", res.data.message);
-      return true;
+
+      return res;
     } catch (err: any) {
       const errorMessage = err.response?.data?.message || "Network Error";
       dispatch({

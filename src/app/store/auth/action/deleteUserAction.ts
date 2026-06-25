@@ -23,9 +23,10 @@ export const deleteUserAccount = (userID: string) => async (dispatch: any) => {
     localStorage.removeItem("user");
 
     showToast("success", "Account closed successfully.");
+
     console.log("DEACTIVATION OF USER:", res);
 
-    return res;
+    return true;
   } catch (err: any) {
     dispatch({
       type: actionTypes.DELETE_USER_FAILURE,

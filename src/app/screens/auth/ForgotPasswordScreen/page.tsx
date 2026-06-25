@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { ArrowLeft, Key, Mail } from "lucide-react";
@@ -20,9 +20,18 @@ const ForgotPasswordScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   // Using your specific reducer state
-  const { loading_now } = useSelector(
+  const { loading_now, mailData } = useSelector(
     (state: any) => state.forgetPasswordReducer,
   );
+
+  // for testing sake
+  useEffect(() => {
+    if (mailData?.resetToken) {
+      setToken(mailData.resetToken);
+      setShowModal(true);
+    }
+  }, [mailData]);
+  // for testing sake
 
   const handleResetRequest = async (e: React.FormEvent) => {
     e.preventDefault();

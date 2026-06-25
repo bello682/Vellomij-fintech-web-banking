@@ -2,52 +2,56 @@ import * as actionTypes from "../actionType/forgetPasswordActionType";
 
 // Define the State structure
 export interface ForgetPasswordState {
-	loading_now: boolean;
-	message: string | null;
-	error: string | null;
+  loading_now: boolean;
+  message: string | null;
+  error: string | null;
+  mailData: any | null;
 }
 
 const initialState: ForgetPasswordState = {
-	loading_now: false,
-	message: null,
-	error: null,
+  loading_now: false,
+  message: null,
+  error: null,
+  mailData: null,
 };
 
 // Define the Action structure
 interface Action {
-	type: string;
-	payload?: any;
+  type: string;
+  payload?: any;
 }
 
 export const forgetPasswordReducer = (
-	state: ForgetPasswordState = initialState,
-	action: Action
+  state: ForgetPasswordState = initialState,
+  action: Action,
 ): ForgetPasswordState => {
-	switch (action.type) {
-		case actionTypes.FORGET_PASSWORD_REQUEST:
-			return {
-				...state,
-				loading_now: true,
-				error: null,
-			};
+  switch (action.type) {
+    case actionTypes.FORGET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading_now: true,
+        error: null,
+        mailData: null,
+      };
 
-		case actionTypes.FORGET_PASSWORD_SUCCESS:
-			return {
-				...state,
-				loading_now: false,
-				message: action.payload,
-				error: null,
-			};
+    case actionTypes.FORGET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading_now: false,
+        message: action.payload.message,
+        mailData: action.payload.mailData,
+        error: null,
+      };
 
-		case actionTypes.FORGET_PASSWORD_FAIL:
-			return {
-				...state,
-				loading_now: false,
-				error: action.payload,
-				message: null,
-			};
+    case actionTypes.FORGET_PASSWORD_FAIL:
+      return {
+        ...state,
+        loading_now: false,
+        error: action.payload,
+        message: null,
+      };
 
-		default:
-			return state;
-	}
+    default:
+      return state;
+  }
 };
