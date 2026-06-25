@@ -97,7 +97,7 @@ const ForgotPasswordScreen = () => {
           </button>
         </form>
       </div>
-      {showModal && (
+      {process.env.NODE_ENV === "development" && showModal && (
         <DevGetForgetResetPasswordModal
           token={token}
           onClose={() => setShowModal(false)}
