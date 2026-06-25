@@ -24,28 +24,23 @@ const ForgotPasswordScreen = () => {
     (state: any) => state.forgetPasswordReducer,
   );
 
-  // for testing sake
-  useEffect(() => {
-    if (mailData?.resetToken) {
-      setToken(mailData.resetToken);
-      setShowModal(true);
-    }
-  }, [mailData]);
-  // for testing sake
-
   const handleResetRequest = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
     // 1. Await the action and get the full response
-    // const response = await dispatch(forgetUserPassword(email, "web") as any);
+    const response = await dispatch(forgetUserPassword(email, "web") as any);
     // if (response) {
     //   // After 3 seconds, navigate back to Login
     //   setTimeout(() => router.push("/screens/auth/LoginScreen"), 3000);
     // }
 
-    // Just dispatch. Let the useEffect handle the Modal logic!
-    dispatch(forgetUserPassword(email, "web") as any);
+    // Check the response directly from the action return
+    // Make sure your Action returns the data object!
+    if (response?.mailData?.resetToken) {
+      setToken(response.mailData.resetToken);
+      setShowModal(true);
+    }
   };
 
   return (
