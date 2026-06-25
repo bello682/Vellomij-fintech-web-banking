@@ -23,7 +23,7 @@ const DeleteAccountScreen = () => {
 
   // const { user } = useAppSelector((state: any) => state.loginState);
   const { loading_now } = useAppSelector((state: any) => state.deleteUserState);
-  const { user } = useAppSelector((state: any) => state.profileReducer);
+  const { user } = useAppSelector((state: any) => state.profileState);
   // You can now access user.bankInfo.balance or user.transactions directly!
 
   const balance = user?.bankInfo?.balance ?? 0;
